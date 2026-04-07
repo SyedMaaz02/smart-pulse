@@ -1,17 +1,16 @@
-import { createServerClient } from "@supabase/ssr";
+import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  // if "next" is in param, use it as the redirect URL
   const next = searchParams.get("next") ?? "/dashboard";
 
   if (code) {
-    // FIX 1: In Next.js 15+, cookies() must be awaited
-    const cookieStore = await cookies(); 
+    const cookieStore = await cookies();
     
+    // Using '!' tells TypeScript: "I promise these variables exist in Vercel/Env"
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -20,32 +19,31 @@ export async function GET(request: Request) {
           get(name: string) {
             return cookieStore.get(name)?.value;
           },
-          set(name: string, value: string, options: any) {
-            // FIX 2: Added try/catch because Middleware/Routes sometimes block .set()
+          set(name: string, value: string, options: CookieOptions) {
             try {
-              cookieStore.set({ name, value, ...options });
-            } catch (error) {
-              // The 'set' can be ignored if the response is already handling it
+              void cookieStore.set({ name, value, ...options });
+            } catch {
+              // Safe to ignore in Server Actions/Routes
             }
           },
-          remove(name: string, options: any) {
+          remove(name: string, options: CookieOptions) {
             try {
-              cookieStore.set({ name, value: "", ...options });
-            } catch (error) {
-              // The 'remove' can be ignored if the response is already handling it
+              void cookieStore.set({ name, value: "", ...options });
+            } catch {
+              // Safe to ignore
             }
           },
         },
       }
     );
     
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
-    if (!error) {
-      // Redirect to the dashboard on success
+    const { error: authError } = await supabase.auth.exchangeCodeForSession(code);
+    
+    if (!authError) {
       return NextResponse.redirect(`${origin}${next}`);
     }
   }
 
-  // Return the user to an error page if the code exchange fails
+  // Line 47: Ensuring we always return a valid Redirect response
   return NextResponse.redirect(`${origin}/auth/auth-error`);
 }
