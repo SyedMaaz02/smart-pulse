@@ -79,27 +79,53 @@
 
 "use client";
 
-import { useState } from "react";
-import { createInvoice } from "@/app/lib/actions";
+import { useState, useEffect } from "react";
+import { createInvoice, deleteInvoice } from "@/app/lib/actions";
+import { createBrowserClient } from "@supabase/ssr";
 
 export default function InvoicesPage() {
   const [loading, setLoading] = useState(false);
+  const [invoices, setInvoices] = useState<any[]>([]);
+
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL as string,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
+  );
+
+  // FETCH REAL DATA FROM SUPABASE
+  const fetchInvoices = async () => {
+    const { data } = await supabase.from("invoices").select("*").order("created_at", { ascending: false });
+    if (data) setInvoices(data);
+  };
+
+  useEffect(() => {
+    fetchInvoices();
+  }, []);
 
   const handleCreate = async () => {
     setLoading(true);
     try {
       await createInvoice({ 
-        client: "Manual Entry Client", 
+        client_name: "Manual Entry Client", 
         amount: 2500, 
         status: "Unpaid" 
       });
-      alert("✅ Invoice successfully added to Supabase!");
-      window.location.reload(); 
+      alert("✅ Invoice successfully added!");
+      fetchInvoices(); // Refresh the list without reloading page
     } catch (err: any) {
-      console.error(err);
-      alert("❌ Error: Check your 'actions.ts' path or Supabase table.");
+      alert("❌ Error: Check column names in Supabase (client_name vs name).");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this invoice?")) return;
+    try {
+      await deleteInvoice(id);
+      fetchInvoices(); // Refresh list
+    } catch (err) {
+      alert("Error deleting invoice");
     }
   };
 
@@ -127,20 +153,35 @@ export default function InvoicesPage() {
                 <th className="px-6 py-4">Client Name</th>
                 <th className="px-6 py-4">Amount</th>
                 <th className="px-6 py-4">Status</th>
-                <th className="px-6 py-4">Date Added</th>
+                <th className="px-6 py-4 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-800">
-              <tr className="hover:bg-zinc-800/30 transition-colors">
-                <td className="px-6 py-4 font-medium">Sample Tech Inc.</td>
-                <td className="px-6 py-4">$4,200.00</td>
-                <td className="px-6 py-4">
-                  <span className="bg-emerald-500/10 text-emerald-400 px-2.5 py-0.5 rounded-full text-xs border border-emerald-500/20">
-                    Paid
-                  </span>
-                </td>
-                <td className="px-6 py-4 text-zinc-500">2026-04-08</td>
-              </tr>
+              {invoices.length === 0 ? (
+                <tr>
+                  <td colSpan={4} className="px-6 py-10 text-center text-zinc-500">No invoices found. Click Create to add one.</td>
+                </tr>
+              ) : (
+                invoices.map((inv) => (
+                  <tr key={inv.id} className="hover:bg-zinc-800/30 transition-colors">
+                    <td className="px-6 py-4 font-medium">{inv.client_name}</td>
+                    <td className="px-6 py-4">${inv.amount}</td>
+                    <td className="px-6 py-4">
+                      <span className="bg-emerald-500/10 text-emerald-400 px-2.5 py-0.5 rounded-full text-xs border border-emerald-500/20">
+                        {inv.status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-right">
+                      <button 
+                        onClick={() => handleDelete(inv.id)}
+                        className="text-red-500 hover:text-red-400 text-sm font-semibold transition-colors"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>
