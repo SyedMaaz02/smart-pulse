@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Client CRM Directory | Smart Pulse</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#c3c6d1",
+                        "on-primary-fixed": "#111c2d",
+                        "secondary": "#5b5e67",
+                        "primary-fixed": "#d8e3fb",
+                        "on-secondary-container": "#61646d",
+                        "inverse-primary": "#bcc7de",
+                        "outline-variant": "#c5c6cd",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#dfe2ed",
+                        "tertiary-container": "#003011",
+                        "on-error": "#ffffff",
+                        "primary": "#091426",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#3c475a",
+                        "on-tertiary-fixed-variant": "#005323",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9fb",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "on-tertiary-container": "#40a25a",
+                        "tertiary-fixed-dim": "#79db8d",
+                        "outline": "#75777d",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-high": "#e6e8ea",
+                        "surface": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#43474f",
+                        "inverse-on-surface": "#eff1f3",
+                        "tertiary": "#001906",
+                        "on-primary-container": "#8590a6",
+                        "surface-bright": "#f7f9fb",
+                        "primary-container": "#1e293b",
+                        "surface-tint": "#545f73",
+                        "primary-fixed-dim": "#bcc7de",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-low": "#f2f4f6",
+                        "on-background": "#191c1e",
+                        "on-tertiary-fixed": "#00210a",
+                        "tertiary-fixed": "#95f8a7",
+                        "inverse-surface": "#2d3133",
+                        "on-secondary-fixed": "#181c23",
+                        "secondary-container": "#dfe2ed",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#45474c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-6 px-4 bg-[#f2f4f6] dark:bg-[#1e293b] h-screen w-64 rounded-none tonal-layering-no-borders z-50">
+<div class="mb-10 px-2">
+<div class="flex items-center gap-2">
+<span class="text-lg font-bold tracking-tighter text-[#0f172a] dark:text-[#10b981] brand-font">Smart Pulse</span>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant mt-1 font-semibold opacity-60">Digital Atelier</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 hover:bg-[#e0e3e5] transition-transform scale-95 active:scale-100 font-['Manrope'] font-medium antialiased" href="#">
+<span class="material-symbols-outlined text-xl">grid_view</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 hover:bg-[#e0e3e5] transition-transform scale-95 active:scale-100 font-['Manrope'] font-medium antialiased" href="#">
+<span class="material-symbols-outlined text-xl">account_tree</span>
+<span>Workspace</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-[#ffffff] text-[#10b981] rounded-[4px] shadow-sm transition-transform scale-95 active:scale-100 font-['Manrope'] font-semibold antialiased" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">group</span>
+<span>Clients</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 hover:bg-[#e0e3e5] transition-transform scale-95 active:scale-100 font-['Manrope'] font-medium antialiased" href="#">
+<span class="material-symbols-outlined text-xl">query_stats</span>
+<span>Analytics</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1">
+<button class="w-full mb-6 bg-primary text-on-primary py-2.5 rounded-lg font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all text-sm">
+<span class="material-symbols-outlined text-lg">add</span>
+                New Project
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 hover:bg-[#e0e3e5] transition-transform scale-95 active:scale-100 font-['Manrope'] font-medium antialiased" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 hover:bg-[#e0e3e5] transition-transform scale-95 active:scale-100 font-['Manrope'] font-medium antialiased" href="#">
+<span class="material-symbols-outlined text-xl">help</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- Top AppBar -->
+<header class="fixed top-0 right-0 left-64 h-16 flex justify-between items-center px-6 bg-[#f7f9fb] z-40">
+<div class="flex items-center bg-surface-container-low px-4 py-1.5 rounded-lg border border-outline-variant/20 w-96">
+<span class="material-symbols-outlined text-on-surface-variant text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full font-body placeholder:text-on-surface-variant/50" placeholder="Search clients, projects, or invoices..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-200/50 rounded-lg transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-200/50 rounded-lg transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img alt="User profile" class="h-full w-full object-cover" data-alt="professional headshot of a creative director in a minimalist studio setting with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3ys-SVMiOqK51fTc0irKu5SnCvJCAGtTs4EHM_9XcAo84U1cFkhe4M8IU3EMmMJcUmQSIbFuSfD6Lo1EnhC0P7mYSDjdmcoSH_ntYjVj3CrMHdwC4wdWpfr7k61hnIp4V98MRdYP9YooY7QX3Eao5RDxRt4DxZL405RZ_K7gkFUgW0phEMV-urEHwCDv85FTY8UKy4GvFtVdQxH4JzNsJSvsKXc4HLbnJMbobH60LqC-ITWo4z13ta4WDRfQSu5y3vMVh7vKB0XY"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-20 p-8 min-h-screen bg-surface">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-10">
+<div>
+<h1 class="text-4xl font-black tracking-tighter text-primary font-headline">Client Directory</h1>
+<p class="text-on-surface-variant mt-2 font-body max-w-lg">Manage your high-value client relationships and track active engagements across your digital atelier.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-lowest border border-outline-variant/30 px-5 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-lg">calendar_today</span>
+                    Schedule Meeting
+                </button>
+<button class="bg-primary text-on-primary px-5 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-opacity-90 transition-all shadow-sm">
+<span class="material-symbols-outlined text-lg">receipt_long</span>
+                    New Invoice
+                </button>
+</div>
+</div>
+<!-- CRM Ledger Table -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/10">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-surface-container-highest">
+<th class="px-6 py-4 text-left">
+<span class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Client Name</span>
+</th>
+<th class="px-6 py-4 text-left">
+<span class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Status</span>
+</th>
+<th class="px-6 py-4 text-left">
+<span class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Lifetime Value (LTV)</span>
+</th>
+<th class="px-6 py-4 text-left">
+<span class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Active Projects</span>
+</th>
+<th class="px-6 py-4 text-right">
+<span class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Actions</span>
+</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-transparent">
+<!-- Row 1 -->
+<tr class="bg-surface hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary-fixed-dim flex items-center justify-center font-bold text-primary">AV</div>
+<div>
+<p class="font-bold text-primary text-sm font-headline">Aether Ventures</p>
+<p class="text-xs text-on-surface-variant">tech-solutions.io</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-tertiary/10 text-on-tertiary-container text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+                                Active
+                            </span>
+</td>
+<td class="px-6 py-5">
+<div>
+<p class="text-sm font-bold text-primary">$42,500.00</p>
+<p class="text-[10px] text-on-surface-variant">Last paid: 12 Oct 2023</p>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="text-sm font-medium text-primary">Brand Re-identity</span>
+<span class="text-xs text-on-surface-variant px-2 py-0.5 bg-surface-container rounded-lg">85%</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface-container-low hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#dfe2ed] flex items-center justify-center font-bold text-primary">NL</div>
+<div>
+<p class="font-bold text-primary text-sm font-headline">Nova Labs</p>
+<p class="text-xs text-on-surface-variant">novalabs.design</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-secondary-container"></span>
+                                Retainer
+                            </span>
+</td>
+<td class="px-6 py-5">
+<div>
+<p class="text-sm font-bold text-primary">$128,000.00</p>
+<p class="text-[10px] text-on-surface-variant">Annual Growth +12%</p>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="text-sm font-medium text-primary">Q4 Campaign</span>
+<span class="text-xs text-on-surface-variant px-2 py-0.5 bg-surface-container rounded-lg">12%</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="bg-surface hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#95f8a7]/20 flex items-center justify-center font-bold text-tertiary">ST</div>
+<div>
+<p class="font-bold text-primary text-sm font-headline">Solaris Tech</p>
+<p class="text-xs text-on-surface-variant">solaris.co</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error-container/50 text-on-error-container text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-error-container"></span>
+                                Pending
+                            </span>
+</td>
+<td class="px-6 py-5">
+<div>
+<p class="text-sm font-bold text-primary">$8,200.00</p>
+<p class="text-[10px] text-on-surface-variant">New Client</p>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="text-sm font-medium text-primary">Discovery Phase</span>
+<span class="text-xs text-on-surface-variant px-2 py-0.5 bg-surface-container rounded-lg">0%</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-surface-container-low hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-outline-variant flex items-center justify-center font-bold text-on-surface">KM</div>
+<div>
+<p class="font-bold text-primary text-sm font-headline">Kinetix Media</p>
+<p class="text-xs text-on-surface-variant">kinetix.media</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-surface-variant"></span>
+                                Paused
+                            </span>
+</td>
+<td class="px-6 py-5">
+<div>
+<p class="text-sm font-bold text-primary">$56,900.00</p>
+<p class="text-[10px] text-on-surface-variant">Dormant since Aug</p>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="text-sm font-medium text-on-surface-variant italic">No active projects</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Metric Summary Bento -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-primary p-6 rounded-xl flex flex-col justify-between">
+<div>
+<span class="text-[10px] font-black uppercase tracking-widest text-primary-fixed-dim/70">Total Ledger Value</span>
+<h3 class="text-3xl font-black text-on-primary mt-2 font-headline">$235,600</h3>
+</div>
+<div class="mt-4 flex items-center gap-2 text-tertiary-fixed font-bold text-xs">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                    +18.4% from last quarter
+                </div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant/30 p-6 rounded-xl flex flex-col justify-between">
+<div>
+<span class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Active Relationships</span>
+<h3 class="text-3xl font-black text-primary mt-2 font-headline">12 Clients</h3>
+</div>
+<div class="mt-4 flex -space-x-2">
+<img alt="Client 1" class="w-8 h-8 rounded-full border-2 border-surface" data-alt="close-up of a middle-aged man smiling with a blurred architectural background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQs9MrWTlmK8PcsI4UEWeRSeyLVtUdxlImjOKW46FKynuZd077mmWNac7heYiprzMQlKSaHSx-M4COHPxVt2f1xYqsfZJUIOtW2_WZ4-lZx05VNP_bnNEpGnuszH_kqj8CSQ1bTvoyl_VD4TUetL2sbC8m-vAhE-2M8m1LVu6tirTXiBSI3Uxq6rK5B1JluSsYDeBC89fGiTt9rtjEfhFsO6afIrkv_mjxbRV7ScN728GG7yce_g91xjC2Uq8oKBpHrPOcaH0WoDs"/>
+<img alt="Client 2" class="w-8 h-8 rounded-full border-2 border-surface" data-alt="portrait of a confident professional woman with a clean studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWbPuLpPN3d_llAZXuSPoVoVuBBC0PU_STo955G5uyFxLBpg2SKUFZp36CjU9MXlBngU5vOrdFsmYoV6ld67go4sDP7KSehHmWO3o6GT-zkAQE5B_fERexoGnegSM-Rfcv39IJ9NwDKkQ58BVchfrOTzZqUfxiXI80hUXIiYg6U0qlB8at8HPtfJtyfdmUYPDxDWfZqXk5joabAMpAuGOSgfnUOzYrRSlowmaRhwbLG8tqCHeMjN2qw8SUhQW4qVjpJIDDvfHDKfs"/>
+<img alt="Client 3" class="w-8 h-8 rounded-full border-2 border-surface" data-alt="professional headshot of a man wearing glasses in a soft-lit modern office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9f7CVkVrDXbvuncU45L0-wTSl9aqWOCzjQ0KRAeKNY1G93TGLFRGJnX4flls9b15NyIYWhXqiBpcuFQvn6hnM6ExzvKvFQtEf_Xz08-7GmGylk9TxS2lx2gZEj7s44ZMUEMh4ANKK2CfWgWD04lLpjmRLSxaRHOqNECYOg53IpwCZwM41f4lVSyzrwiPdLrr-H9yB0vebGVrAEm3XrSODM29CkCBPyGXp_QPpZzUig5KPZ7blTLO-u8gJgAL_WCWEJKQIpMbF5DM"/>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border-2 border-surface flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+9</div>
+</div>
+</div>
+<div class="bg-tertiary-container p-6 rounded-xl flex flex-col justify-between relative overflow-hidden">
+<div class="z-10">
+<span class="text-[10px] font-black uppercase tracking-widest text-tertiary-fixed/70">Efficiency Rating</span>
+<h3 class="text-3xl font-black text-white mt-2 font-headline">94.2%</h3>
+</div>
+<div class="mt-4 z-10">
+<p class="text-xs text-tertiary-fixed/80">Project delivery speed is optimal.</p>
+</div>
+<!-- Abstract visual element -->
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-9xl text-white" style="font-variation-settings: 'wght' 700;">speed</span>
+</div>
+</div>
+</div>
+<!-- Asymmetric Detail Card -->
+<div class="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
+<div class="lg:col-span-8 bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10">
+<div class="flex justify-between items-start mb-6">
+<h2 class="text-2xl font-black tracking-tight text-primary font-headline">Recent Financial Activity</h2>
+<button class="text-on-tertiary-container text-xs font-bold uppercase tracking-widest hover:underline">Download Report</button>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface rounded-lg">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-tertiary-container bg-tertiary-fixed/20 p-2 rounded">payments</span>
+<div>
+<p class="text-sm font-bold text-primary">Aether Ventures Invoice #204</p>
+<p class="text-xs text-on-surface-variant">Processed via Stripe</p>
+</div>
+</div>
+<span class="text-sm font-black text-primary">+$12,400.00</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface rounded-lg">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-error bg-error/10 p-2 rounded">pending_actions</span>
+<div>
+<p class="text-sm font-bold text-primary">Nova Labs Subscription Renew</p>
+<p class="text-xs text-on-surface-variant">Automatic payment pending</p>
+</div>
+</div>
+<span class="text-sm font-black text-on-surface-variant">+$4,200.00</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 bg-[#10b981] p-8 rounded-xl text-white relative overflow-hidden flex flex-col justify-between shadow-lg shadow-[#10b981]/20">
+<div class="z-10">
+<h2 class="text-2xl font-black leading-tight font-headline">Ready for more?<br/>Launch a campaign.</h2>
+<p class="mt-4 text-sm text-white/80 font-body">Leverage analytics to identify your highest-growth potential clients for the next quarter.</p>
+</div>
+<button class="z-10 mt-8 w-full bg-primary text-white py-3 rounded font-bold uppercase tracking-widest text-xs hover:bg-black transition-colors">
+                    Start AI Analysis
+                </button>
+<div class="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+<div class="absolute -left-10 -bottom-10 w-32 h-32 bg-primary/20 rounded-full blur-2xl"></div>
+</div>
+</div>
+</main>
+</body></html>

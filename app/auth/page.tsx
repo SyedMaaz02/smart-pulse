@@ -1,194 +1,8 @@
-// "use client";
-
-// import { useState } from "react";
-// import { useRouter } from "next/navigation";
-
-// import { Button } from "@/components/ui/button";
-// import { Input } from "@/components/ui/input";
-// import { createSupabaseBrowserClient } from "@/lib/supabase/client";
-
-// // "use client";
-
-// import { useState } from "react";
-// import { supabase } from "@/lib/supabase/client"; // Ensure this path is correct
-// import { useRouter } from "next/navigation";
-// import { Loader2 } from "lucide-react";
-
-// "use client";
-
-// import { useState } from "react";
-// import { createBrowserClient } from "@supabase/ssr";
-// import { useRouter } from "next/navigation";
-// import { Loader2, Mail, Lock, ArrowRight } from "lucide-react";
-
-// export default function AuthPage() {
-//   const [isLogin, setIsLogin] = useState(true);
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [confirmPassword, setConfirmPassword] = useState("");
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState("");
-  
-//   const router = useRouter();
-
-//   // Initialize Supabase Browser Client
-//   const supabase = createBrowserClient(
-//     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-//     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-//   );
-
-//   const handleAuth = async (e: React.FormEvent) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     setError("");
-
-//     try {
-//       if (isLogin) {
-//         // --- STEP 1: STRICT LOGIN ---
-//         // This only works if the user already exists in Supabase
-//         const { data, error: signInError } = await supabase.auth.signInWithPassword({
-//           email,
-//           password,
-//         });
-        
-//         if (signInError) {
-//           // Custom error message if they try to login without an account
-//           if (signInError.message.includes("Invalid login credentials")) {
-//             throw new Error("Account not found or invalid password. Please Sign Up first!");
-//           }
-//           throw signInError;
-//         }
-        
-//         // Success! Send them to the dashboard
-//         router.push("/dashboard");
-//         router.refresh();
-
-//       } else {
-//         // --- STEP 2: STRICT SIGN UP ---
-//         if (password !== confirmPassword) {
-//           throw new Error("Passwords do not match!");
-//         }
-
-//         const { data, error: signUpError } = await supabase.auth.signUp({
-//           email,
-//           password,
-//           options: {
-//             emailRedirectTo: `${window.location.origin}/auth/callback`,
-//           },
-//         });
-
-//         if (signUpError) throw signUpError;
-
-//         // SUCCESS LOGIC: 
-//         // We do NOT log them in yet. We force them to the Login tab.
-//         alert("Registration successful! Now, please use the 'Sign In' tab to enter your credentials.");
-//         setIsLogin(true); // Switches the UI back to Login mode
-//         setPassword("");  // Clears sensitive fields
-//         setConfirmPassword("");
-//       }
-//     } catch (err: any) {
-//       setError(err.message);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div className="flex min-h-screen items-center justify-center bg-black p-4 font-sans">
-//       <div className="w-full max-w-md space-y-6 bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800 backdrop-blur-xl shadow-2xl">
-//         <div className="space-y-2 text-center">
-//           <h1 className="text-3xl font-bold tracking-tighter text-white">
-//             {isLogin ? "Welcome back" : "Create an account"}
-//           </h1>
-//           <p className="text-zinc-400 text-sm text-balance">
-//             {isLogin ? "Enter your details to access your dashboard" : "Enter your details to get started with SmartPulse"}
-//           </p>
-//         </div>
-
-//         <form onSubmit={handleAuth} className="space-y-4">
-//           <div className="space-y-4">
-//             <div className="relative">
-//               <Mail className="absolute left-3 top-3 h-5 w-5 text-zinc-500" />
-//               <input
-//                 type="email"
-//                 placeholder="name@example.com"
-//                 required
-//                 className="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-2.5 pl-10 pr-4 text-white placeholder:text-zinc-600 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
-//                 value={email}
-//                 onChange={(e) => setEmail(e.target.value)}
-//               />
-//             </div>
-
-//             <div className="relative">
-//               <Lock className="absolute left-3 top-3 h-5 w-5 text-zinc-500" />
-//               <input
-//                 type="password"
-//                 placeholder="Password"
-//                 required
-//                 className="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-2.5 pl-10 pr-4 text-white placeholder:text-zinc-600 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
-//                 value={password}
-//                 onChange={(e) => setPassword(e.target.value)}
-//               />
-//             </div>
-
-//             {!isLogin && (
-//               <div className="relative">
-//                 <Lock className="absolute left-3 top-3 h-5 w-5 text-zinc-500" />
-//                 <input
-//                   type="password"
-//                   placeholder="Confirm Password"
-//                   required
-//                   className="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-2.5 pl-10 pr-4 text-white placeholder:text-zinc-600 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
-//                   value={confirmPassword}
-//                   onChange={(e) => setConfirmPassword(e.target.value)}
-//                 />
-//               </div>
-//             )}
-//           </div>
-
-//           {error && (
-//             <p className="text-sm text-red-500 font-medium bg-red-500/10 p-3 rounded-lg border border-red-500/20">
-//               {error}
-//             </p>
-//           )}
-
-//           <button
-//             type="submit"
-//             disabled={loading}
-//             className="w-full bg-white text-black font-semibold py-3 rounded-xl hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
-//           >
-//             {loading ? (
-//               <Loader2 className="h-5 w-5 animate-spin" />
-//             ) : (
-//               <>
-//                 {isLogin ? "Sign In" : "Sign Up"}
-//                 <ArrowRight className="h-4 w-4" />
-//               </>
-//             )}
-//           </button>
-//         </form>
-
-//         <div className="text-center pt-2">
-//           <button
-//             onClick={() => {
-//               setIsLogin(!isLogin);
-//               setError("");
-//             }}
-//             className="text-sm text-zinc-500 hover:text-white transition-colors"
-//           >
-//             {isLogin ? "Don't have an account? Create one" : "Already have an account? Sign in"}
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
 "use client";
 
 import { useState, useMemo, JSX } from "react";
 import { useRouter } from "next/navigation";
 import { createBrowserClient } from "@supabase/ssr";
-import { Loader2, Mail, Lock, ArrowRight } from "lucide-react";
 
 export default function AuthPage(): JSX.Element {
   const router = useRouter();
@@ -215,7 +29,6 @@ export default function AuthPage(): JSX.Element {
     setMessage(null);
     setLoading(true);
 
-    // --- Step 1: Handle Login ---
     if (isLogin) {
       try {
         const { error } = await supabase.auth.signInWithPassword({
@@ -240,14 +53,12 @@ export default function AuthPage(): JSX.Element {
       return;
     }
 
-    // --- Step 2: Guard Clause — password mismatch check ---
     if (password !== confirmPassword) {
       setAuthError("Passwords do not match. Please try again.");
       setLoading(false);
       return;
     }
 
-    // --- Step 3: Handle Sign Up ---
     try {
       const { error } = await supabase.auth.signUp({
         email,
@@ -281,153 +92,251 @@ export default function AuthPage(): JSX.Element {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
+    <>
+      {/* Stitch Login — Professional SaaS */}
+      <main className="relative min-h-screen flex items-center justify-center p-6 bg-surface overflow-hidden">
+        {/* Industrial Background Elements */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: "radial-gradient(#c5c6cd 0.5px, transparent 0.5px)",
+            backgroundSize: "24px 24px",
+            opacity: 0.15,
+          }}
+        />
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-surface-container-low -skew-x-12 transform translate-x-1/3 pointer-events-none" />
 
-        {/* Header */}
-        <div className="mb-6 text-center">
-          <h1 className="text-2xl font-bold text-gray-900">
-            {isLogin ? "Welcome back" : "Create an account"}
-          </h1>
-          <p className="mt-1 text-sm text-gray-500">
-            {isLogin
-              ? "Sign in to your account to continue"
-              : "Fill in the details below to get started"}
-          </p>
-        </div>
-
-        {/* Feedback Messages */}
-        {authError && (
-          <div className="mb-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
-            {authError}
-          </div>
-        )}
-        {message && (
-          <div className="mb-4 rounded-lg bg-green-50 px-4 py-3 text-sm text-green-700">
-            {message}
-          </div>
-        )}
-
-        {/* Form */}
-        <form onSubmit={handleAuth} className="space-y-4" noValidate>
-
-          {/* Email */}
-          <div>
-            <label
-              htmlFor="email"
-              className="mb-1 block text-sm font-medium text-gray-700"
-            >
-              Email address
-            </label>
-            <div className="relative">
-              <Mail
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-                size={16}
-              />
-              <input
-                id="email"
-                type="email"
-                autoComplete="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                className="w-full rounded-lg border border-gray-300 py-2 pl-9 pr-3 text-sm text-gray-900 placeholder-gray-400 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
-                disabled={loading}
-              />
-            </div>
-          </div>
-
-          {/* Password */}
-          <div>
-            <label
-              htmlFor="password"
-              className="mb-1 block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-            <div className="relative">
-              <Lock
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-                size={16}
-              />
-              <input
-                id="password"
-                type="password"
-                autoComplete={isLogin ? "current-password" : "new-password"}
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                className="w-full rounded-lg border border-gray-300 py-2 pl-9 pr-3 text-sm text-gray-900 placeholder-gray-400 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
-                disabled={loading}
-              />
-            </div>
-          </div>
-
-          {/* Confirm Password (Sign-up only) */}
-          {!isLogin && (
+        {/* Authentication Container */}
+        <div className="relative w-full max-w-[1100px] grid md:grid-cols-12 bg-surface-container-lowest overflow-hidden shadow-none border border-outline-variant/20 rounded-lg">
+          {/* Left Side: Editorial Content */}
+          <div className="hidden md:flex md:col-span-6 flex-col justify-between p-12 bg-surface-container-low">
             <div>
-              <label
-                htmlFor="confirmPassword"
-                className="mb-1 block text-sm font-medium text-gray-700"
-              >
-                Confirm password
-              </label>
-              <div className="relative">
-                <Lock
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-                  size={16}
-                />
-                <input
-                  id="confirmPassword"
-                  type="password"
-                  autoComplete="new-password"
-                  required
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full rounded-lg border border-gray-300 py-2 pl-9 pr-3 text-sm text-gray-900 placeholder-gray-400 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
-                  disabled={loading}
-                />
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-primary flex items-center justify-center rounded">
+                  <span
+                    className="material-symbols-outlined text-on-primary"
+                    style={{ fontVariationSettings: "'FILL' 1" }}
+                  >
+                    token
+                  </span>
+                </div>
+                <span className="text-lg font-bold tracking-tighter text-slate-900 uppercase font-headline">
+                  Smart Pulse
+                </span>
               </div>
             </div>
-          )}
+            <div className="space-y-6">
+              <h2 className="text-4xl font-extrabold tracking-tighter font-headline text-primary leading-tight">
+                THE PRECISION <br /> LEDGER FOR THE <br /> MODERN ATELIER.
+              </h2>
+              <p className="text-on-surface-variant max-w-sm leading-relaxed">
+                Securely manage your financials, client projects, and time logs within a high-trust
+                digital environment designed for architectural clarity.
+              </p>
+            </div>
+            <div className="flex items-center gap-8">
+              <div>
+                <div className="text-2xl font-bold font-headline text-primary">0.02s</div>
+                <div className="text-[10px] uppercase tracking-widest text-on-surface-variant font-semibold">
+                  Latency Floor
+                </div>
+              </div>
+              <div className="w-px h-8 bg-outline-variant/30" />
+              <div>
+                <div className="text-2xl font-bold font-headline text-primary">AES-256</div>
+                <div className="text-[10px] uppercase tracking-widest text-on-surface-variant font-semibold">
+                  Encryption Grade
+                </div>
+              </div>
+            </div>
+          </div>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            {loading ? (
-              <>
-                <Loader2 size={16} className="animate-spin" />
-                Please wait…
-              </>
-            ) : (
-              <>
-                {isLogin ? "Sign in" : "Create account"}
-                <ArrowRight size={16} />
-              </>
-            )}
-          </button>
+          {/* Right Side: Login Form */}
+          <div className="md:col-span-6 p-8 md:p-16 flex flex-col justify-center">
+            <div className="max-w-md w-full mx-auto">
+              {/* Form Header */}
+              <div className="mb-10">
+                <h1 className="text-3xl font-extrabold tracking-tight font-headline text-primary mb-2">
+                  {isLogin ? "Sign in to your Ledger" : "Create your Workspace"}
+                </h1>
+                <p className="text-on-surface-variant text-sm">
+                  {isLogin
+                    ? "Access your workspace and project intelligence."
+                    : "Register to begin managing your digital atelier."}
+                </p>
+              </div>
 
-        </form>
+              {/* Feedback Messages */}
+              {authError && (
+                <div className="mb-6 rounded-lg bg-error-container px-4 py-3 text-sm text-on-error-container border border-error/20">
+                  {authError}
+                </div>
+              )}
+              {message && (
+                <div className="mb-6 rounded-lg bg-tertiary-fixed px-4 py-3 text-sm text-on-tertiary-fixed border border-on-tertiary-container/20">
+                  {message}
+                </div>
+              )}
 
-        {/* Toggle Login / Sign Up */}
-        <p className="mt-6 text-center text-sm text-gray-500">
-          {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-          <button
-            type="button"
-            onClick={toggleMode}
-            className="font-medium text-blue-600 hover:underline focus:outline-none"
-          >
-            {isLogin ? "Sign up" : "Sign in"}
-          </button>
-        </p>
+              {/* Social Login (Login only) */}
+              {isLogin && (
+                <>
+                  <button className="w-full flex items-center justify-center gap-3 py-3 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-lg text-sm font-semibold text-primary hover:bg-surface-container-low transition-all duration-200">
+                    <span className="material-symbols-outlined text-xl">login</span>
+                    Continue with Google
+                  </button>
+                  <div className="relative my-8">
+                    <div className="absolute inset-0 flex items-center">
+                      <span className="w-full border-t border-outline-variant/20" />
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase tracking-widest">
+                      <span className="bg-surface-container-lowest px-4 text-on-surface-variant font-medium">
+                        Or enter credentials
+                      </span>
+                    </div>
+                  </div>
+                </>
+              )}
 
+              {/* Credential Form */}
+              <form onSubmit={handleAuth} className="space-y-5" noValidate>
+                <div>
+                  <label
+                    className="block text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-2 ml-1"
+                    htmlFor="email"
+                  >
+                    Work Email
+                  </label>
+                  <input
+                    className="block w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-lg text-sm text-primary placeholder:text-outline/50 focus:ring-1 focus:ring-primary focus:border-primary transition-all outline-none"
+                    id="email"
+                    name="email"
+                    placeholder="name@atelier.com"
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={loading}
+                  />
+                </div>
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <label
+                      className="block text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1"
+                      htmlFor="password"
+                    >
+                      Password
+                    </label>
+                    {isLogin && (
+                      <a
+                        className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant hover:text-primary transition-colors"
+                        href="#"
+                      >
+                        Forgot?
+                      </a>
+                    )}
+                  </div>
+                  <input
+                    className="block w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-lg text-sm text-primary placeholder:text-outline/50 focus:ring-1 focus:ring-primary focus:border-primary transition-all outline-none"
+                    id="password"
+                    name="password"
+                    placeholder="••••••••"
+                    type="password"
+                    required
+                    autoComplete={isLogin ? "current-password" : "new-password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    disabled={loading}
+                  />
+                </div>
+
+                {/* Confirm Password (Sign-up only) */}
+                {!isLogin && (
+                  <div>
+                    <label
+                      className="block text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-2 ml-1"
+                      htmlFor="confirmPassword"
+                    >
+                      Confirm Password
+                    </label>
+                    <input
+                      className="block w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-lg text-sm text-primary placeholder:text-outline/50 focus:ring-1 focus:ring-primary focus:border-primary transition-all outline-none"
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      placeholder="••••••••"
+                      type="password"
+                      required
+                      autoComplete="new-password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      disabled={loading}
+                    />
+                  </div>
+                )}
+
+                {isLogin && (
+                  <div className="flex items-center gap-2 py-1">
+                    <input
+                      className="w-4 h-4 text-primary border-outline-variant/40 rounded focus:ring-primary focus:ring-offset-0 transition-all cursor-pointer"
+                      id="remember"
+                      name="remember"
+                      type="checkbox"
+                    />
+                    <label
+                      className="text-xs text-on-surface-variant font-medium cursor-pointer"
+                      htmlFor="remember"
+                    >
+                      Keep this session active for 30 days
+                    </label>
+                  </div>
+                )}
+
+                <button
+                  className="w-full py-4 bg-primary-container text-on-primary text-sm font-bold tracking-widest uppercase rounded-lg hover:bg-primary transition-all duration-300 transform active:scale-[0.98] mt-4 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                  type="submit"
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <span className="material-symbols-outlined animate-spin text-lg">progress_activity</span>
+                      Processing...
+                    </>
+                  ) : isLogin ? (
+                    "Establish Connection"
+                  ) : (
+                    "Create Workspace"
+                  )}
+                </button>
+              </form>
+
+              {/* Footer Help */}
+              <div className="mt-10 text-center">
+                <p className="text-xs text-on-surface-variant">
+                  {isLogin ? "New to the Ledger? " : "Already have a workspace? "}
+                  <button
+                    type="button"
+                    onClick={toggleMode}
+                    className="text-primary font-bold hover:underline underline-offset-4"
+                  >
+                    {isLogin ? "Request Workspace" : "Sign in"}
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom decorative elements */}
+        <div className="absolute bottom-8 right-8 text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant/40 select-none">
+          © 2024 SMART PULSE DIGITAL ATELIER
+        </div>
+      </main>
+
+      {/* Floating background blurs */}
+      <div className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none">
+        <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-[10%] right-[5%] w-96 h-96 bg-on-tertiary-container/5 rounded-full blur-3xl" />
       </div>
-    </div>
+    </>
   );
 }

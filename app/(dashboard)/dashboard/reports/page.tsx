@@ -11,8 +11,8 @@ export default function ReportsPage() {
     <div className="p-6 text-white">
       <h1 className="text-2xl font-bold mb-6">Analytics Report</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {stats.map((stat, i) => (
-          <div key={i} className="bg-zinc-900 p-6 rounded-2xl border border-zinc-800 shadow-sm">
+        {stats.map((stat) => (
+          <div key={stat.label} className="bg-zinc-900 p-6 rounded-2xl border border-zinc-800 shadow-sm">
             <div className={`${stat.color} mb-4`}>{stat.icon}</div>
             <p className="text-zinc-400 text-sm">{stat.label}</p>
             <p className="text-3xl font-bold mt-1">{stat.value}</p>

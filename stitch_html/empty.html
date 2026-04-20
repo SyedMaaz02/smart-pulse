@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Pulse - Empty State</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#c3c6d1",
+                    "on-primary-fixed": "#111c2d",
+                    "secondary": "#5b5e67",
+                    "primary-fixed": "#d8e3fb",
+                    "on-secondary-container": "#61646d",
+                    "inverse-primary": "#bcc7de",
+                    "outline-variant": "#c5c6cd",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#dfe2ed",
+                    "tertiary-container": "#003011",
+                    "on-error": "#ffffff",
+                    "primary": "#091426",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#3c475a",
+                    "on-tertiary-fixed-variant": "#005323",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#191c1e",
+                    "error": "#ba1a1a",
+                    "background": "#f7f9fb",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#eceef0",
+                    "on-tertiary-container": "#40a25a",
+                    "tertiary-fixed-dim": "#79db8d",
+                    "outline": "#75777d",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d8dadc",
+                    "surface-container-high": "#e6e8ea",
+                    "surface": "#f7f9fb",
+                    "on-secondary-fixed-variant": "#43474f",
+                    "inverse-on-surface": "#eff1f3",
+                    "tertiary": "#001906",
+                    "on-primary-container": "#8590a6",
+                    "surface-bright": "#f7f9fb",
+                    "primary-container": "#1e293b",
+                    "surface-tint": "#545f73",
+                    "primary-fixed-dim": "#bcc7de",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-variant": "#e0e3e5",
+                    "surface-container-low": "#f2f4f6",
+                    "on-background": "#191c1e",
+                    "on-tertiary-fixed": "#00210a",
+                    "tertiary-fixed": "#95f8a7",
+                    "inverse-surface": "#2d3133",
+                    "on-secondary-fixed": "#181c23",
+                    "secondary-container": "#dfe2ed",
+                    "error-container": "#ffdad6",
+                    "on-surface-variant": "#45474c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .industrial-glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-6 px-4 bg-[#f2f4f6] dark:bg-[#1e293b] w-64 h-screen rounded-none tonal-layering-no-borders font-['Manrope'] font-medium antialiased hidden md:flex">
+<div class="mb-10 px-2">
+<h1 class="text-lg font-bold tracking-tighter text-[#0f172a] dark:text-[#10b981]">Smart Pulse</h1>
+<p class="text-[10px] uppercase tracking-[0.1em] text-on-surface-variant opacity-60">Digital Atelier</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-[#0f172a] dark:hover:text-white hover:bg-[#e0e3e5] dark:hover:bg-slate-800 scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-[#ffffff] dark:bg-[#0f172a] text-[#10b981] rounded-[4px] shadow-sm scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span>Workspace</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-[#0f172a] dark:hover:text-white hover:bg-[#e0e3e5] dark:hover:bg-slate-800 scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Clients</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-[#0f172a] dark:hover:text-white hover:bg-[#e0e3e5] dark:hover:bg-slate-800 scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+<span>Analytics</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1 border-t border-outline-variant/10 pt-4">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-2.5 rounded-[4px] font-bold text-sm mb-6 hover:bg-primary-container transition-colors duration-200">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Project
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-[#0f172a] dark:hover:text-white hover:bg-[#e0e3e5] dark:hover:bg-slate-800 scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-[#0f172a] dark:hover:text-white hover:bg-[#e0e3e5] dark:hover:bg-slate-800 scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-64 min-h-screen flex flex-col">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center w-full px-6 h-16 bg-[#f7f9fb] dark:bg-[#0f172a] docked full-width top-0 font-['Manrope'] tracking-tight font-bold">
+<div class="flex items-center gap-4">
+<div class="md:hidden">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+</div>
+<div class="flex items-center bg-surface-container-low px-3 py-1.5 rounded-lg border border-outline-variant/20">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none text-sm focus:ring-0 w-48 font-normal" placeholder="Search workspace..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center gap-6">
+<span class="text-[#10b981] font-semibold text-sm cursor-pointer">Projects</span>
+<span class="text-slate-500 dark:text-slate-400 text-sm cursor-pointer hover:text-primary transition-colors">Invoices</span>
+<span class="text-slate-500 dark:text-slate-400 text-sm cursor-pointer hover:text-primary transition-colors">Reports</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 text-on-surface-variant hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors duration-200 rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors duration-200 rounded-full">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 bg-primary-container rounded-full overflow-hidden ml-2 border border-outline-variant/30">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="professional headshot of a creative director in a minimalist studio setting with soft grey background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBetXFYgDKswyQmv-nJF2hrrtesCkncoMzZDVZwnIs-R6QKmawrMw08hbJkCMoU78TMk6cQqXRPgk8He8NZt7nsnX5y-5WT1RE5GVV1z4ggDKLq7JOK9vGbRksGSWLUDvTTGIB99Smq02hhSjBOHLfFqXJ1gjehnNsnDWFCfVnHz5WQQ2D3gzInE4NstPrmOnNnkucLYlEYbuzm0OEqyluYneXuRPcLTAxrAYHx83KN9eQXjjHxg72xAwERZ1ucSjq-OVW_MkX03Cw"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Empty State Canvas -->
+<section class="flex-1 flex flex-col items-center justify-center p-8 bg-surface">
+<!-- Central Ledger Empty State -->
+<div class="relative w-full max-w-2xl text-center space-y-12">
+<!-- Background Geometric Accents (Asymmetry) -->
+<div class="absolute -top-24 -left-12 w-64 h-64 bg-tertiary-fixed-dim/10 rounded-full blur-3xl -z-10"></div>
+<div class="absolute top-48 -right-24 w-80 h-80 bg-primary-fixed/20 rounded-full blur-3xl -z-10"></div>
+<!-- Industrial Illustration Container -->
+<div class="relative inline-block">
+<!-- The "Empty Ledger" Visual -->
+<div class="relative mx-auto w-64 h-80 bg-surface-container-lowest border border-outline-variant/30 rounded-lg shadow-sm rotate-1 flex flex-col p-6 overflow-hidden">
+<!-- Top header marks -->
+<div class="flex justify-between items-center mb-8">
+<div class="w-12 h-2 bg-surface-container-highest"></div>
+<div class="w-8 h-8 rounded-full bg-surface-container"></div>
+</div>
+<!-- Empty Rows Simulation -->
+<div class="space-y-4">
+<div class="flex gap-4">
+<div class="w-2/3 h-3 bg-surface-container-low"></div>
+<div class="w-1/3 h-3 bg-surface-container-low"></div>
+</div>
+<div class="flex gap-4 opacity-50">
+<div class="w-1/3 h-3 bg-surface-container-low"></div>
+<div class="w-2/3 h-3 bg-surface-container-low"></div>
+</div>
+<div class="flex gap-4 opacity-30">
+<div class="w-1/2 h-3 bg-surface-container-low"></div>
+<div class="w-1/2 h-3 bg-surface-container-low"></div>
+</div>
+</div>
+<!-- Floating Glass Action Card (Asymmetric Overlay) -->
+<div class="absolute bottom-12 -right-8 industrial-glass w-48 p-4 rounded-xl border border-white/40 shadow-xl -rotate-6">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 bg-tertiary-fixed-dim/30 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant text-lg" data-icon="drafts" style="font-variation-settings: 'FILL' 1;">drafts</span>
+</div>
+<div class="text-left">
+<div class="text-[10px] font-headline font-extrabold uppercase tracking-widest text-on-tertiary-container">Status</div>
+<div class="text-[12px] font-bold text-primary">Pending Setup</div>
+</div>
+</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="w-1/4 h-full bg-[#10b981]"></div>
+</div>
+</div>
+<!-- Precision Compass Icon -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10">
+<span class="material-symbols-outlined text-8xl" data-icon="architecture">architecture</span>
+</div>
+</div>
+<!-- Side Blueprint Element -->
+<div class="absolute -bottom-4 -left-12 w-40 h-40 bg-primary-container p-4 rounded shadow-2xl rotate-3 flex flex-col justify-end">
+<div class="h-0.5 w-full bg-white/20 mb-2"></div>
+<div class="h-0.5 w-3/4 bg-white/10 mb-2"></div>
+<div class="text-[8px] font-mono text-white/40 uppercase tracking-tighter">Ref: PULSE_00</div>
+</div>
+</div>
+<!-- Editorial Content -->
+<div class="max-w-md mx-auto">
+<span class="inline-block px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[10px] font-bold tracking-widest uppercase mb-4 rounded-sm">
+                        Zero State
+                    </span>
+<h2 class="text-4xl md:text-5xl font-headline font-black tracking-tighter text-primary mb-6">
+                        Start your first <span class="text-[#10b981]">Ledger</span> entries
+                    </h2>
+<p class="text-on-surface-variant font-body leading-relaxed text-lg mb-10 opacity-80">
+                        Your workspace is clean and ready for precision. Launch a new project or create an invoice to begin tracking your digital atelier's growth.
+                    </p>
+<!-- CTA Cluster -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<button class="w-full sm:w-auto px-8 py-4 bg-primary text-on-primary font-headline font-bold text-sm tracking-tight rounded-sm hover:bg-gradient-to-br from-primary to-primary-container transition-all duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
+                            Create New Project
+                        </button>
+<button class="w-full sm:w-auto px-8 py-4 bg-white text-primary border border-outline-variant/40 font-headline font-bold text-sm tracking-tight rounded-sm hover:bg-surface-container-low transition-all duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="file_upload">file_upload</span>
+                            Import Data
+                        </button>
+</div>
+</div>
+<!-- Footer Footnote -->
+<div class="pt-12 flex items-center justify-center gap-8 opacity-40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="verified_user">verified_user</span>
+<span class="text-[11px] font-bold uppercase tracking-widest">Secure Ledger</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="bolt">bolt</span>
+<span class="text-[11px] font-bold uppercase tracking-widest">Instant Sync</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Bar (Mobile Only) -->
+<nav class="md:hidden flex justify-around items-center h-16 bg-surface-container-lowest border-t border-outline-variant/10 px-4">
+<a class="flex flex-col items-center gap-1 text-[#10b981]" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="text-[10px] font-bold uppercase">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span class="text-[10px] font-bold uppercase">Projects</span>
+</a>
+<button class="p-3 bg-primary text-on-primary rounded-full -mt-10 shadow-lg">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-[10px] font-bold uppercase">Clients</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] font-bold uppercase">Settings</span>
+</a>
+</nav>
+</main>
+</body></html>

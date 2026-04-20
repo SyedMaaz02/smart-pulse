@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings &amp; Profile | Smart Pulse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#c3c6d1",
+                        "on-primary-fixed": "#111c2d",
+                        "secondary": "#5b5e67",
+                        "primary-fixed": "#d8e3fb",
+                        "on-secondary-container": "#61646d",
+                        "inverse-primary": "#bcc7de",
+                        "outline-variant": "#c5c6cd",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#dfe2ed",
+                        "tertiary-container": "#003011",
+                        "on-error": "#ffffff",
+                        "primary": "#091426",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#3c475a",
+                        "on-tertiary-fixed-variant": "#005323",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9fb",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "on-tertiary-container": "#40a25a",
+                        "tertiary-fixed-dim": "#79db8d",
+                        "outline": "#75777d",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-high": "#e6e8ea",
+                        "surface": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#43474f",
+                        "inverse-on-surface": "#eff1f3",
+                        "tertiary": "#001906",
+                        "on-primary-container": "#8590a6",
+                        "surface-bright": "#f7f9fb",
+                        "primary-container": "#1e293b",
+                        "surface-tint": "#545f73",
+                        "primary-fixed-dim": "#bcc7de",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-low": "#f2f4f6",
+                        "on-background": "#191c1e",
+                        "on-tertiary-fixed": "#00210a",
+                        "tertiary-fixed": "#95f8a7",
+                        "inverse-surface": "#2d3133",
+                        "on-secondary-fixed": "#181c23",
+                        "secondary-container": "#dfe2ed",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#45474c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-6 px-4 bg-[#f2f4f6] dark:bg-[#1e293b] h-screen w-64 rounded-none tonal-layering-no-borders flat no shadows font-['Manrope'] font-medium antialiased hidden md:flex">
+<div class="mb-10 px-2">
+<h1 class="text-lg font-bold tracking-tighter text-[#0f172a] dark:text-[#10b981]">Smart Pulse</h1>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant opacity-60">Digital Atelier</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-[#0f172a] dark:hover:text-white hover:bg-[#e0e3e5] dark:hover:bg-slate-800 scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-[#0f172a] dark:hover:text-white hover:bg-[#e0e3e5] dark:hover:bg-slate-800 scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span>Workspace</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-[#0f172a] dark:hover:text-white hover:bg-[#e0e3e5] dark:hover:bg-slate-800 scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Clients</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-[#0f172a] dark:hover:text-white hover:bg-[#e0e3e5] dark:hover:bg-slate-800 scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+<span>Analytics</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1">
+<button class="w-full mb-6 bg-primary text-on-primary py-2.5 rounded shadow-sm font-bold text-sm tracking-tight transition-all hover:bg-primary-container">
+                New Project
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 bg-[#ffffff] dark:bg-[#0f172a] text-[#10b981] rounded-[4px] shadow-sm scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-[#0f172a] dark:hover:text-white hover:bg-[#e0e3e5] dark:hover:bg-slate-800 scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-64 min-h-screen">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center w-full px-6 h-16 bg-[#f7f9fb] dark:bg-[#0f172a] docked full-width top-0 bg-[#f2f4f6] dark:bg-[#1e293b] flat no shadows font-['Manrope'] tracking-tight font-bold sticky top-0 z-30">
+<div class="flex items-center gap-4">
+<span class="text-[#0f172a] dark:text-white text-xl font-black tracking-tighter">Smart Pulse</span>
+<span class="h-4 w-[1px] bg-outline-variant/30 hidden md:block"></span>
+<span class="text-sm font-medium text-on-surface-variant hidden md:block">Account Settings</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="flex items-center gap-3 pl-2">
+<img alt="User profile" class="w-8 h-8 rounded-full object-cover grayscale brightness-110" data-alt="Close-up professional portrait of a male designer in a creative office studio with warm natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbfticNi9owwEKlISvRRwcQxYr3cKFBxiznpvlMJm7k0RWedSGlOXy_r6Sit-Z1BM4OdM0IJIz2RZV89rFRRIQlkPuRkChOstypJPi-ki-PkPZ7AP2O10wc83DjmlGgbcglAeDWjRoH-eING97ngayzW-0a2unyJ9rTJLee28cCKEL-4ugoab_zY4KwfyuBgvhjmSAPcra-63dwIF2ENvBg-gVsKhgximvTPe6v2Fc9wW-fQnWGvOBUGLUCxy1AAsc_g5sNLeBCgA"/>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="max-w-6xl mx-auto p-6 md:p-10">
+<!-- Profile Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+<div class="flex gap-6 items-center">
+<div class="relative group">
+<img alt="User profile" class="w-24 h-24 md:w-32 md:h-32 rounded-lg object-cover" data-alt="Detailed professional headshot of a man with focused expression, high contrast lighting, urban architectural background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBAGK1Y_uFbhopZabFqflRlxkAHcw4qtczdIzte-CFOxj5ncj3U8i5UsHdD3QnK2lqPP1t0UMRq5IMceKNGvkQPBXnWZfgCe8kcxIobTswtzfJwQ4Me4jul_sX3ijOSHmJ8xhTe0ZlR0A1rto3KbFni3NZIGSvDxss3GSuqyd1oWS8UnyTLOTvoEDZHLAKH9lRfcaDD9euq8jJ3KxsPvHw-2r6EP6nIzfjjf9ZhGdT9LN9kinMVVvSG1_QyM1g4qaRKRpe2BUPzJQ"/>
+<button class="absolute -bottom-2 -right-2 bg-primary text-on-primary p-2 rounded-lg shadow-lg">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+<div>
+<h2 class="text-3xl md:text-4xl font-extrabold font-headline tracking-tighter text-primary">Julian Sterling</h2>
+<p class="text-on-surface-variant font-medium">Lead Visual Architect &amp; Contractor</p>
+<div class="flex gap-4 mt-4">
+<div class="flex items-center gap-2 px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold uppercase tracking-widest rounded">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container animate-pulse"></span>
+                                Verified Ledger
+                            </div>
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-highest text-on-surface text-[10px] font-bold uppercase tracking-widest rounded">
+                                Tier 1 Professional
+                            </div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2 p-4 bg-surface-container-lowest rounded-lg border border-outline-variant/20 shadow-sm max-w-xs w-full">
+<div class="flex justify-between items-center">
+<span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Public Portfolio Toggle</span>
+<button class="w-10 h-5 bg-[#10b981] rounded-full relative transition-colors">
+<span class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></span>
+</button>
+</div>
+<p class="text-[11px] text-on-surface-variant leading-relaxed">Visibility is currently active. Your atelier is public to prospective clients.</p>
+</div>
+</div>
+<!-- Tabbed Interface -->
+<div class="flex flex-col gap-8">
+<div class="flex border-b border-outline-variant/10 overflow-x-auto no-scrollbar">
+<button class="px-6 py-4 text-sm font-bold tracking-tight text-[#10b981] border-b-2 border-[#10b981] whitespace-nowrap">Payout Methods</button>
+<button class="px-6 py-4 text-sm font-medium tracking-tight text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Tax Info</button>
+<button class="px-6 py-4 text-sm font-medium tracking-tight text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Security &amp; Privacy</button>
+<button class="px-6 py-4 text-sm font-medium tracking-tight text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Preferences</button>
+</div>
+<!-- Bento Content Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Main Form Section -->
+<div class="lg:col-span-8 space-y-6">
+<div class="bg-surface-container-lowest p-8 rounded border border-outline-variant/20">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-xl font-extrabold font-headline tracking-tight text-primary">Active Payout Systems</h3>
+<button class="text-sm font-bold text-[#10b981] flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="add_circle">add_circle</span>
+                                    Add Method
+                                </button>
+</div>
+<div class="space-y-4">
+<!-- Payout Card -->
+<div class="flex items-center justify-between p-5 bg-surface-container-low rounded border border-outline-variant/20 group hover:border-[#10b981]/30 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary flex items-center justify-center rounded text-on-primary">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+</div>
+<div>
+<p class="font-bold text-primary">Industrial Bank of Zurich</p>
+<p class="text-xs text-on-surface-variant tracking-wider">•••• 8829 | Primary Ledger</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[10px] font-bold uppercase bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded">Default</span>
+<button class="p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Payout Card -->
+<div class="flex items-center justify-between p-5 bg-surface-container-low rounded border border-outline-variant/20 group hover:border-[#10b981]/30 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center rounded text-primary">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<div>
+<p class="font-bold text-primary">Stripe Connect</p>
+<p class="text-xs text-on-surface-variant tracking-wider">julian.s@digitalatelier.studio</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-[10px] font-bold uppercase text-on-surface-variant hover:text-primary">Set Default</button>
+<button class="p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Info Form -->
+<div class="bg-surface-container-lowest p-8 rounded border border-outline-variant/20">
+<h3 class="text-xl font-extrabold font-headline tracking-tight text-primary mb-6">Regional Payout Preferences</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Settlement Currency</label>
+<select class="w-full bg-surface-container-low border border-outline-variant/20 px-4 py-3 rounded text-sm focus:ring-0 focus:border-[#10b981] transition-all">
+<option>USD - United States Dollar</option>
+<option>EUR - Euro</option>
+<option>CHF - Swiss Franc</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Payout Threshold</label>
+<input class="w-full bg-surface-container-low border border-outline-variant/20 px-4 py-3 rounded text-sm focus:ring-0 focus:border-[#10b981] transition-all" type="text" value="$2,500.00"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Stats Section -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Summary Card -->
+<div class="bg-primary text-on-primary p-8 rounded shadow-lg relative overflow-hidden">
+<div class="relative z-10">
+<p class="text-[10px] font-bold uppercase tracking-[0.2em] opacity-60 mb-2">Available for Withdrawal</p>
+<h4 class="text-4xl font-extrabold font-headline tracking-tighter mb-6">$14,820.45</h4>
+<button class="w-full bg-[#10b981] hover:bg-[#0d9668] text-primary font-bold py-3 rounded text-sm transition-colors">
+                                    Withdraw to Bank
+                                </button>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+</div>
+<!-- Information Alert -->
+<div class="bg-tertiary-container p-6 rounded border border-on-tertiary-container/20">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#10b981]" data-icon="info">info</span>
+<div class="space-y-2">
+<p class="text-sm font-bold text-[#10b981]">Next Settlement Date</p>
+<p class="text-xs text-on-tertiary leading-relaxed">Your monthly ledger closes on Oct 24th. Payments are processed within 48 hours of settlement.</p>
+</div>
+</div>
+</div>
+<!-- Industrial Ledger Component -->
+<div class="bg-surface-container-lowest border border-outline-variant/20 rounded overflow-hidden">
+<div class="bg-surface-container-highest px-4 py-3">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface">Recent Transaction Logs</span>
+</div>
+<div class="divide-y divide-outline-variant/10">
+<div class="px-4 py-3 flex justify-between items-center hover:bg-surface-container-low transition-colors">
+<div class="space-y-0.5">
+<p class="text-xs font-bold text-primary">Payout #9921</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Sept 12, 2023</p>
+</div>
+<p class="text-xs font-bold text-primary">$4,200.00</p>
+</div>
+<div class="px-4 py-3 flex justify-between items-center hover:bg-surface-container-low transition-colors">
+<div class="space-y-0.5">
+<p class="text-xs font-bold text-primary">Payout #9918</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Aug 12, 2023</p>
+</div>
+<p class="text-xs font-bold text-primary">$5,150.00</p>
+</div>
+<div class="px-4 py-3 flex justify-between items-center hover:bg-surface-container-low transition-colors">
+<div class="space-y-0.5">
+<p class="text-xs font-bold text-primary">Payout #9914</p>
+<p class="text-[10px] text-on-surface-variant uppercase">July 12, 2023</p>
+</div>
+<p class="text-xs font-bold text-primary">$3,840.10</p>
+</div>
+</div>
+<button class="w-full py-3 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant hover:text-primary bg-surface-container-low">View Full History</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Nav Bar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-16 bg-[#f7f9fb] dark:bg-[#0f172a] flex justify-around items-center px-4 z-40 border-t border-outline-variant/10">
+<button class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="text-[10px] font-medium">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span class="text-[10px] font-medium">Workspace</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#10b981] font-semibold">
+<span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="text-[10px]">Settings</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</button>
+</nav>
+</body></html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Pulse - The Pulse Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#c3c6d1",
+                        "on-primary-fixed": "#111c2d",
+                        "secondary": "#5b5e67",
+                        "primary-fixed": "#d8e3fb",
+                        "on-secondary-container": "#61646d",
+                        "inverse-primary": "#bcc7de",
+                        "outline-variant": "#c5c6cd",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#dfe2ed",
+                        "tertiary-container": "#003011",
+                        "on-error": "#ffffff",
+                        "primary": "#091426",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#3c475a",
+                        "on-tertiary-fixed-variant": "#005323",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9fb",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "on-tertiary-container": "#40a25a",
+                        "tertiary-fixed-dim": "#79db8d",
+                        "outline": "#75777d",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-high": "#e6e8ea",
+                        "surface": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#43474f",
+                        "inverse-on-surface": "#eff1f3",
+                        "tertiary": "#001906",
+                        "on-primary-container": "#8590a6",
+                        "surface-bright": "#f7f9fb",
+                        "primary-container": "#1e293b",
+                        "surface-tint": "#545f73",
+                        "primary-fixed-dim": "#bcc7de",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-low": "#f2f4f6",
+                        "on-background": "#191c1e",
+                        "on-tertiary-fixed": "#00210a",
+                        "tertiary-fixed": "#95f8a7",
+                        "inverse-surface": "#2d3133",
+                        "on-secondary-fixed": "#181c23",
+                        "secondary-container": "#dfe2ed",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#45474c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        .ghost-border {
+            border: 1px solid rgba(197, 198, 205, 0.2);
+        }
+        .zebra-row:nth-child(even) {
+            background-color: #f2f4f6;
+        }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface antialiased overflow-x-hidden">
+<!-- SideNavBar (The Anchor) -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-6 px-4 bg-[#f2f4f6] dark:bg-[#1e293b] w-64 z-50">
+<div class="mb-10 px-4">
+<h1 class="text-lg font-bold tracking-tighter text-[#0f172a] dark:text-[#10b981] font-headline">Smart Pulse</h1>
+<p class="text-[10px] uppercase tracking-[0.15em] text-on-surface-variant font-label opacity-70">Digital Atelier</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Active State Logic: Dashboard is Active -->
+<a class="flex items-center gap-3 px-4 py-2 bg-[#ffffff] dark:bg-[#0f172a] text-[#10b981] rounded-[4px] shadow-sm transition-transform scale-95 active:scale-100 font-headline font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-[#e0e3e5] dark:hover:bg-slate-800 transition-transform scale-95 active:scale-100 font-headline font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span>Workspace</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-[#e0e3e5] dark:hover:bg-slate-800 transition-transform scale-95 active:scale-100 font-headline font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Clients</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-[#e0e3e5] dark:hover:bg-slate-800 transition-transform scale-95 active:scale-100 font-headline font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+<span>Analytics</span>
+</a>
+</nav>
+<button class="mx-4 mt-auto mb-8 bg-primary text-on-primary py-2.5 px-4 rounded-[4px] text-sm font-semibold tracking-tight hover:bg-primary-container transition-colors shadow-sm">
+            New Project
+        </button>
+<div class="space-y-1 pt-6 border-t border-outline-variant/10">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-[#e0e3e5] dark:hover:bg-slate-800 transition-transform scale-95 active:scale-100 text-sm" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-[#e0e3e5] dark:hover:bg-slate-800 transition-transform scale-95 active:scale-100 text-sm" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="help">help</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Viewport -->
+<main class="ml-64 flex flex-col min-h-screen relative">
+<!-- TopAppBar (Execution) -->
+<header class="sticky top-0 z-40 bg-[#f7f9fb] dark:bg-[#0f172a] h-16 flex justify-between items-center w-full px-8">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-[4px] py-2 pl-10 pr-4 text-sm focus:ring-1 focus:ring-primary/20 placeholder:text-slate-400" placeholder="Search operations..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden ml-2">
+<img alt="User profile" class="h-full w-full object-cover" data-alt="professional portrait of a creative professional in a bright minimal studio setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA8gOYIwRm9WRq8EEMAGdGgLAuugEKxHl-CRFJIp8YOm92yafYcG2D_Mwc7Mdf2HNXFtx_Lo2adTReuA9esewSJbNOxU4DKZMkWDNkcAGJrrPRFMc08CPDvC7ZH6RDUUarv5iY2E2JJQMzrIOILKNEojsbwHXiXjsqyPAW7UY6mEr4lKKRLU31SRGLfpSnlUV81vpUEfiRLRiYh5_ni8Tl-MqyOQzk4L8szp9aHlREa9CMtvkmnWlzzxqXvyeL3dT-4VmWx2e4dlM"/>
+</div>
+</div>
+</header>
+<!-- Canvas Content -->
+<div class="p-8 max-w-[1600px] w-full mx-auto space-y-8">
+<!-- Page Header (Editorial Flow) -->
+<div class="flex items-end justify-between">
+<div>
+<span class="label-sm uppercase tracking-[0.2em] text-on-tertiary-container font-semibold mb-1 block">Operational Overview</span>
+<h2 class="text-4xl font-headline font-black tracking-tighter text-primary">The Pulse</h2>
+</div>
+<div class="text-right">
+<p class="font-headline font-bold text-lg text-primary tracking-tight">Tuesday, 24 Oct</p>
+<p class="text-sm text-on-surface-variant font-label">System status: <span class="text-on-tertiary-container font-medium">Optimal</span></p>
+</div>
+</div>
+<!-- Dashboard Grid (Bento Style) -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Large Revenue Pulse Card (Asymmetric Focus) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest ghost-border p-6 rounded-lg relative overflow-hidden">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h3 class="font-headline text-xl font-bold tracking-tight text-primary">Revenue Pulse</h3>
+<p class="text-sm text-on-surface-variant">Real-time fiscal velocity tracking</p>
+</div>
+<div class="text-right">
+<span class="text-3xl font-headline font-black text-primary">$142,840.00</span>
+<div class="flex items-center justify-end text-on-tertiary-container font-bold text-sm">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="trending_up">trending_up</span>
+                                12.4%
+                            </div>
+</div>
+</div>
+<!-- Sparkline/Area Chart Visual -->
+<div class="h-64 w-full mt-4 flex items-end">
+<svg class="w-full h-full preserve-3d" viewbox="0 0 1000 200">
+<defs>
+<lineargradient id="gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:rgba(16, 185, 129, 0.2)"></stop>
+<stop offset="100%" style="stop-color:rgba(16, 185, 129, 0)"></stop>
+</lineargradient>
+</defs>
+<path d="M0,150 Q100,140 200,160 T400,120 T600,80 T800,100 T1000,40 V200 H0 Z" fill="url(#gradient)"></path>
+<path d="M0,150 Q100,140 200,160 T400,120 T600,80 T800,100 T1000,40" fill="none" stroke="#10b981" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+</div>
+<!-- Tonal Legend -->
+<div class="grid grid-cols-4 gap-4 mt-6 border-t border-outline-variant/10 pt-6">
+<div class="space-y-1">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Retainers</p>
+<p class="font-headline font-bold text-primary">$84.2k</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Milestones</p>
+<p class="font-headline font-bold text-primary">$42.1k</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Ad-hoc</p>
+<p class="font-headline font-bold text-primary">$16.5k</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Pipeline</p>
+<p class="font-headline font-bold text-[#10b981]">$210.0k</p>
+</div>
+</div>
+</div>
+<!-- Next Milestone Countdown (Industrial aesthetic) -->
+<div class="col-span-12 lg:col-span-4 bg-primary text-on-primary p-8 rounded-lg flex flex-col justify-between overflow-hidden relative">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-9xl font-thin" data-icon="hourglass_empty">hourglass_empty</span>
+</div>
+<div class="z-10">
+<p class="label-sm uppercase tracking-[0.2em] text-on-primary-container font-bold mb-6">Next Critical Milestone</p>
+<h4 class="text-2xl font-headline font-bold tracking-tight mb-2">Stellar OS Branding</h4>
+<p class="text-on-primary-container text-sm leading-relaxed mb-10">Beta release and stakeholder visual walkthrough.</p>
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-primary-container/50 p-4 rounded-lg text-center">
+<p class="text-3xl font-headline font-black tracking-tighter">04</p>
+<p class="text-[10px] uppercase tracking-widest text-on-primary-container">Days</p>
+</div>
+<div class="bg-primary-container/50 p-4 rounded-lg text-center">
+<p class="text-3xl font-headline font-black tracking-tighter">12</p>
+<p class="text-[10px] uppercase tracking-widest text-on-primary-container">Hrs</p>
+</div>
+<div class="bg-primary-container/50 p-4 rounded-lg text-center">
+<p class="text-3xl font-headline font-black tracking-tighter">48</p>
+<p class="text-[10px] uppercase tracking-widest text-on-primary-container">Min</p>
+</div>
+</div>
+</div>
+<div class="z-10 mt-12">
+<button class="w-full py-3 bg-on-tertiary-container text-primary font-black uppercase text-xs tracking-[0.2em] hover:bg-tertiary-fixed-dim transition-colors">
+                            Prepare Delivery
+                        </button>
+</div>
+</div>
+<!-- Active Projects Section (Cards with progress bars) -->
+<div class="col-span-12">
+<div class="flex items-baseline justify-between mb-6">
+<h3 class="font-headline text-xl font-bold tracking-tight text-primary">Active Production</h3>
+<a class="text-xs font-bold uppercase tracking-widest text-on-tertiary-container flex items-center hover:underline" href="#">
+                            View All Workspace
+                            <span class="material-symbols-outlined text-sm ml-1" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Project Card 1 -->
+<div class="bg-surface-container-lowest ghost-border p-6 rounded-lg transition-all hover:bg-surface-container-low group">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-surface-container-highest p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="architecture">architecture</span>
+</div>
+<span class="bg-tertiary-container text-on-tertiary-container px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">In Progress</span>
+</div>
+<h5 class="font-headline font-bold text-primary mb-1">Aether Interface Design</h5>
+<p class="text-sm text-on-surface-variant mb-6 leading-relaxed">System architecture and component library development for V2.</p>
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">
+<span>Milestone 4/6</span>
+<span>72%</span>
+</div>
+<div class="h-1 bg-surface-container-high w-full rounded-full overflow-hidden">
+<div class="h-full bg-on-tertiary-container transition-all" style="width: 72%"></div>
+</div>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="bg-surface-container-lowest ghost-border p-6 rounded-lg transition-all hover:bg-surface-container-low group">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-surface-container-highest p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="data_object">data_object</span>
+</div>
+<span class="bg-primary text-on-primary px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Review Required</span>
+</div>
+<h5 class="font-headline font-bold text-primary mb-1">Nexus Data Pipeline</h5>
+<p class="text-sm text-on-surface-variant mb-6 leading-relaxed">Automating client onboarding flows with predictive modeling.</p>
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">
+<span>Milestone 2/4</span>
+<span>45%</span>
+</div>
+<div class="h-1 bg-surface-container-high w-full rounded-full overflow-hidden">
+<div class="h-full bg-primary transition-all" style="width: 45%"></div>
+</div>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="bg-surface-container-lowest ghost-border p-6 rounded-lg transition-all hover:bg-surface-container-low group">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-surface-container-highest p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="brush">brush</span>
+</div>
+<span class="bg-tertiary-container text-on-tertiary-container px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">In Progress</span>
+</div>
+<h5 class="font-headline font-bold text-primary mb-1">Velvet Brand Identity</h5>
+<p class="text-sm text-on-surface-variant mb-6 leading-relaxed">Full rebrand including typography, palette, and tone of voice.</p>
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">
+<span>Milestone 8/10</span>
+<span>88%</span>
+</div>
+<div class="h-1 bg-surface-container-high w-full rounded-full overflow-hidden">
+<div class="h-full bg-on-tertiary-container transition-all" style="width: 88%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Industrial Ledger Table Section -->
+<div class="col-span-12 lg:col-span-12">
+<div class="bg-surface-container-lowest ghost-border rounded-lg overflow-hidden">
+<div class="px-6 py-4 border-b border-outline-variant/10 flex justify-between items-center">
+<h3 class="font-headline text-lg font-bold tracking-tight text-primary">Recent Operations</h3>
+<button class="text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-primary flex items-center">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="filter_list">filter_list</span>
+                                Filter
+                            </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-highest">
+<tr>
+<th class="px-6 py-3 label-sm uppercase tracking-widest text-on-surface-variant font-bold text-[10px]">Reference</th>
+<th class="px-6 py-3 label-sm uppercase tracking-widest text-on-surface-variant font-bold text-[10px]">Operation</th>
+<th class="px-6 py-3 label-sm uppercase tracking-widest text-on-surface-variant font-bold text-[10px]">Entity</th>
+<th class="px-6 py-3 label-sm uppercase tracking-widest text-on-surface-variant font-bold text-[10px]">Status</th>
+<th class="px-6 py-3 label-sm uppercase tracking-widest text-on-surface-variant font-bold text-[10px] text-right">Value</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<tr class="zebra-row">
+<td class="px-6 py-4 font-label text-xs text-on-surface-variant">INV-8402-A</td>
+<td class="px-6 py-4">
+<p class="font-headline font-bold text-sm text-primary">UI Audit Retainer</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-fixed flex items-center justify-center text-[10px] font-bold text-primary">AC</div>
+<span class="text-sm font-medium text-on-surface">Alpha Corp</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 text-xs text-on-tertiary-container font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+                                                Paid
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right font-headline font-bold text-sm text-primary">$4,250.00</td>
+</tr>
+<tr class="zebra-row">
+<td class="px-6 py-4 font-label text-xs text-on-surface-variant">OPS-9921-X</td>
+<td class="px-6 py-4">
+<p class="font-headline font-bold text-sm text-primary">Cloud Deployment</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-secondary-fixed-dim flex items-center justify-center text-[10px] font-bold text-primary">SL</div>
+<span class="text-sm font-medium text-on-surface">Solaris Labs</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 text-xs text-secondary font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                                Pending
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right font-headline font-bold text-sm text-primary">$12,400.00</td>
+</tr>
+<tr class="zebra-row">
+<td class="px-6 py-4 font-label text-xs text-on-surface-variant">INV-8415-B</td>
+<td class="px-6 py-4">
+<p class="font-headline font-bold text-sm text-primary">Logo Explorations</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-tertiary-fixed flex items-center justify-center text-[10px] font-bold text-primary">V</div>
+<span class="text-sm font-medium text-on-surface">Velvet</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 text-xs text-on-tertiary-container font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+                                                Paid
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right font-headline font-bold text-sm text-primary">$2,800.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-surface-container-low text-center">
+<button class="text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">
+                                Download Statement
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky FAB (Only on main dashboard as per rules) -->
+<button class="fixed bottom-8 right-8 bg-[#10b981] text-primary w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-transform z-50">
+<span class="material-symbols-outlined text-2xl font-bold" data-icon="add">add</span>
+</button>
+</main>
+</body></html>
