@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
-export async function createClient(formData: FormData) {
+export async function createClient(formData: FormData): Promise<void> {
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },
@@ -11,7 +11,7 @@ export async function createClient(formData: FormData) {
   } = await supabase.auth.getUser();
 
   if (authError || !user) {
-    return { success: false, error: "Unauthorized." };
+    return;
   }
 
   // Exact mapping to Supabase columns: name, email, phone
@@ -20,24 +20,17 @@ export async function createClient(formData: FormData) {
   const phone = formData.get("phone") as string;
 
   if (!name || !email) {
-    return { success: false, error: "Name and Email are required." };
+    return;
   }
 
-  const { data, error } = await supabase
+  await supabase
     .from("clients")
     .insert({
       user_id: user.id,
       name,
       email,
       phone,
-    })
-    .select()
-    .single();
-
-  if (error) {
-    return { success: false, error: error.message };
-  }
+    });
 
   revalidatePath("/clients");
-  return { success: true, client: data };
 }

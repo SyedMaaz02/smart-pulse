@@ -2,8 +2,29 @@ import NavigationLayout from "@/components/NavigationLayout";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
+interface TaskCard {
+  id: string;
+  tag: string;
+  tagColor: string;
+  title: string;
+  description: string | null;
+  date?: string | null;
+  hasAttachment?: boolean;
+  avatarCount?: number;
+  progress?: number;
+  showApprove?: boolean;
+  completedDate?: string;
+}
+
+interface KanbanColumn {
+  title: string;
+  count: number;
+  isDone?: boolean;
+  cards: TaskCard[];
+}
+
 // Static task data derived from the Stitch workspace design
-const columns = [
+const columns: KanbanColumn[] = [
   {
     title: "To Do",
     count: 3,
@@ -148,7 +169,7 @@ export default async function ProjectsPage() {
                     )}
                     {!col.isDone && (
                       <div className="flex items-center justify-between">
-                        {card.avatarCount > 0 && (
+                        {card.avatarCount !== undefined && card.avatarCount > 0 && (
                           <div className="flex -space-x-2">
                             <div className="h-6 w-6 rounded-full bg-primary-fixed-dim border-2 border-white flex items-center justify-center text-[8px] font-bold text-primary">
                               +{card.avatarCount}
