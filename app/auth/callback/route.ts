@@ -5,12 +5,12 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
+  // if "next" is in param, use it in redirect pay attention to usage of `origin`
   const next = searchParams.get("next") ?? "/dashboard";
 
   if (code) {
     const cookieStore = await cookies();
-    
-    // Using '!' tells TypeScript: "I promise these variables exist in Vercel/Env"
+
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -23,27 +23,30 @@ export async function GET(request: Request) {
             try {
               void cookieStore.set({ name, value, ...options });
             } catch {
-              // Safe to ignore in Server Actions/Routes
+              // The `set` method was called from a Server Component.
+              // This can be ignored if you have middleware refreshing
+              // user sessions.
             }
           },
           remove(name: string, options: CookieOptions) {
             try {
               void cookieStore.set({ name, value: "", ...options });
             } catch {
-              // Safe to ignore
+              // The `delete` method was called from a Server Component.
+              // This can be ignored if you have middleware refreshing
+              // user sessions.
             }
           },
         },
       }
     );
-    
-    const { error: authError } = await supabase.auth.exchangeCodeForSession(code);
-    
-    if (!authError) {
+
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    if (!error) {
       return NextResponse.redirect(`${origin}${next}`);
     }
   }
 
-  // Line 47: Ensuring we always return a valid Redirect response
-  return NextResponse.redirect(`${origin}/auth/auth-error`);
+  // return the user to an error page with instructions
+  return NextResponse.redirect(`${origin}/auth?error=AuthCallbackError`);
 }

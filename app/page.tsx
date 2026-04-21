@@ -1,6 +1,14 @@
 import Link from "next/link";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const supabase = await createSupabaseServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const ctaHref = user ? "/dashboard" : "/auth";
+
   return (
     <div className="bg-surface text-on-surface antialiased">
       {/* TopNavBar */}
@@ -20,11 +28,11 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="flex items-center gap-6">
-            <Link className="text-[#1e293b] hover:text-[#10b981] transition-all duration-300 font-semibold tracking-widest text-sm uppercase" href="/auth">
-              Login
+            <Link className="text-[#1e293b] hover:text-[#10b981] transition-all duration-300 font-semibold tracking-widest text-sm uppercase" href={ctaHref}>
+              {user ? "Dashboard" : "Login"}
             </Link>
-            <Link href="/auth" className="bg-[#10b981] text-white px-5 py-2.5 rounded font-semibold text-sm active:opacity-80 active:scale-95 transition-all duration-200 shadow-sm">
-              Get Started (Free)
+            <Link href={ctaHref} className="bg-[#10b981] text-white px-5 py-2.5 rounded font-semibold text-sm active:opacity-80 active:scale-95 transition-all duration-200 shadow-sm">
+              {user ? "Go to Console" : "Get Started (Free)"}
             </Link>
           </div>
         </nav>
@@ -45,11 +53,11 @@ export default function LandingPage() {
                 The digital atelier for modern professionals. A high-density, precision ledger designed to manage projects, automate invoicing, and master your financial architecture.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/auth" className="bg-[#10b981] text-white px-8 py-4 rounded font-bold text-lg hover:opacity-90 transition-all flex items-center justify-center gap-2">
-                  Get Started (Free)
+                <Link href={ctaHref} className="bg-[#10b981] text-white px-8 py-4 rounded font-bold text-lg hover:opacity-90 transition-all flex items-center justify-center gap-2">
+                  {user ? "Open Console" : "Get Started (Free)"}
                   <span className="material-symbols-outlined">arrow_forward</span>
                 </Link>
-                <Link href="/auth" className="border border-outline-variant/30 text-primary px-8 py-4 rounded font-bold text-lg hover:bg-surface-container-low transition-all text-center">
+                <Link href={user ? "/projects" : "/auth"} className="border border-outline-variant/30 text-primary px-8 py-4 rounded font-bold text-lg hover:bg-surface-container-low transition-all text-center">
                   View Demo
                 </Link>
               </div>
@@ -194,11 +202,11 @@ export default function LandingPage() {
               Join thousands of high-performance freelancers who have transitioned to a more precise way of working.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link href="/auth" className="bg-[#10b981] text-white px-10 py-5 rounded font-bold text-lg hover:bg-opacity-90 transition-all shadow-xl">
-                Get Started (Free)
+              <Link href={ctaHref} className="bg-[#10b981] text-white px-10 py-5 rounded font-bold text-lg hover:bg-opacity-90 transition-all shadow-xl">
+                {user ? "Open Console" : "Get Started (Free)"}
               </Link>
-              <Link href="/auth" className="bg-primary-container text-white px-10 py-5 rounded font-bold text-lg hover:bg-opacity-80 transition-all border border-outline-variant/10">
-                Schedule a Demo
+              <Link href={user ? "/dashboard" : "/auth"} className="bg-primary-container text-white px-10 py-5 rounded font-bold text-lg hover:bg-opacity-80 transition-all border border-outline-variant/10">
+                {user ? "View Metrics" : "Schedule a Demo"}
               </Link>
             </div>
           </div>
